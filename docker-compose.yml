@@ -1,8 +1,8 @@
 version: '2'
 services:
   database:
-    container_name: dhis2-database
-    image: pgracio/dhis2-db:2.27-sierra-leone
+    container_name: dhis2-stoppalu
+    image: mdillon/postgis:9.5
     environment:
       POSTGRES_USER: dhis
       POSTGRES_DB: dhis
