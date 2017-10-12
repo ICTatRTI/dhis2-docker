@@ -43,10 +43,10 @@ wget -O "$current_dir/$releases_dir/$file_name" "https://www.dhis2.org/download/
 cp -a "$current_dir/$releases_dir/$file_name" "$current_dir/releases/dhis2.war"
 
 # build new image using new dhis.war 
-image_id=$(docker build -q -t dhis2/dhis2-web:$DHIS2_VERSION-tomcat7-jre8-$dt .)
+image_id=$(docker build -q -t researchtriangle/dhis2-web:$DHIS2_VERSION-tomcat7-jre8-$dt .)
 
 echo "Image id: $image_id"
-docker tag $image_id dhis2/dhis2-web:$DHIS2_VERSION-tomcat7-jre8-latest
+docker tag $image_id researchtriangle/dhis2-web:$DHIS2_VERSION-tomcat7-jre8-latest
 
 docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-docker push dhis2/dhis2-web
+docker push researchtriangle/dhis2-web
