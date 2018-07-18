@@ -1,0 +1,34 @@
+version: '2'
+services:
+  database:
+    container_name: dhis2-ntd-ethdb
+    image: mdillon/postgis:9.5
+    environment:
+      POSTGRES_USER: dhis
+      POSTGRES_DB: dhis
+      POSTGRES_PASSWORD: dhis
+      POSTGRES_DB_TARGET: dhis-target
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - 5432:5432
+    volumes:
+      - ntd-ethdb:/var/lib/postgresql/data/pgdata
+
+  web:
+    container_name: dhis2-web-custom
+    image: researchtriangle/dhis2-web-custom
+    environment:
+      JAVA_OPTS: "-Xmx1024m -Xms4000m"
+      POSTGRES_DB: dhis
+      PDA_ADDRESS: 8000
+      JPDA_TRANSPORT: dt_socket
+    ports:
+      - 8085:8080
+      - 9000:8000
+    depends_on:
+      - database
+    entrypoint: ./wait-for-it.sh -t 0 database:5432 --
+    command: catalina.sh jpda run # https://github.com/docker/compose/issues/3140
+
+volumes:
+  ntd-ethdb:
