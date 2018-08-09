@@ -1,0 +1,15 @@
+version: '2'
+services:
+  
+  web:
+    container_name: dhis2-web-testdata
+    image: researchtriangle/dhis2-web-testdata
+    environment:
+      JAVA_OPTS: "-Xmx1024m -Xms4000m"
+      POSTGRES_DB: dhis
+    ports:
+      - 8085:8080
+    command: catalina.sh run # https://github.com/docker/compose/issues/3140
+
+volumes:
+  ntd-ethdb:
