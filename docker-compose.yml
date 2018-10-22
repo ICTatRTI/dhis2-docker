@@ -1,7 +1,7 @@
 version: '2'
 services:
   database:
-    container_name: dhis2-epidetect
+    container_name: dhis2-spla-db
     image: mdillon/postgis:9.5
     environment:
       POSTGRES_USER: dhis
@@ -15,7 +15,7 @@ services:
       - spla:/var/lib/postgresql/data/pgdata
 
   web:
-    container_name: dhis2-web
+    container_name: dhis2-spla-web
     image: researchtriangle/dhis2-web:2.28-tomcat7-jre8-latest
     environment:
       JAVA_OPTS: "-Xmx1024m -Xms4000m"
