@@ -2,7 +2,7 @@ version: '2'
 services:
   database:
     container_name: dhis2-ntd-ethdb
-    image: mdillon/postgis:9.5
+    image: researchtriangle/dhis2-db:2.31-ethiopia-ntd
     environment:
       POSTGRES_USER: dhis
       POSTGRES_DB: dhis
@@ -12,11 +12,11 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ntd-ethdb:/var/lib/postgresql/data/pgdata
+      - ntd-ethdb_10:/var/lib/postgresql/data/pgdata
 
   web:
     container_name: dhis2-web-eth
-    image: researchtriangle/dhis2-web:2.30-tomcat7-jre8-latest 
+    image: researchtriangle/dhis2-web:2.31-tomcat7-jre8-latest 
     environment:
       JAVA_OPTS: "-Xmx1024m -Xms4000m"
       POSTGRES_DB: dhis
@@ -28,4 +28,4 @@ services:
     command: catalina.sh run # https://github.com/docker/compose/issues/3140
 
 volumes:
-  ntd-ethdb:
+  ntd-ethdb_10:
