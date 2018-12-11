@@ -40,8 +40,9 @@ function fetch_data {
   elif [ $DATA_SET == "world-adoption" ]; then
     curl -L -o dhis2-db.sql.gz https://github.com/dhis2/dhis2-demo-db/raw/master/world-adoption/world-adoption.sql.gz?raw=true
   elif [ $DATA_SET == "ethiopia-ntd" ]; then
-    curl -L -o dhis2-db.sql.gz https://dl.dropbox.com/s/hrftouj2h18yu95/backups_ethntd.rti-ghd.org_db_dhis2_2.30-cbf11ef_20181207T031303Z.sql.gz?dl=0
+    curl -L -o dhis2-db.sql.gz https://dl.dropbox.com/s/lsvtuvucbu14a52/dhis2-db.sql.gz?dl=0
   fi
+  
   
   patch_demo_db
 }

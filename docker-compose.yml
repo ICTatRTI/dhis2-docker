@@ -12,7 +12,7 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ntd-ethdb_10:/var/lib/postgresql/data/pgdata
+      - ethiopia-ntd-db:/var/lib/postgresql/data/pgdata
 
   web:
     container_name: dhis2-web-eth
@@ -28,4 +28,4 @@ services:
     command: catalina.sh run # https://github.com/docker/compose/issues/3140
 
 volumes:
-  ntd-ethdb_10:
+  ethiopia-ntd-db:
