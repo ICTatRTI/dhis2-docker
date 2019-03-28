@@ -66,8 +66,17 @@ done
 validate_parameters
 
 VERSION_TMP=${DHIS2_VERSION//[-._]/}
+DATESTAMP=`date "+%Y%m%d"`
 
 fetch_data
 
-docker build -t researchtriangle/dhis2-db:$DHIS2_VERSION-$DATA_SET .
+
+
+image_id=$(docker build -t researchtriangle/dhis2-db:$DHIS2_VERSION-$DATA_SET-$DATESTAMP .)
+
+
+docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+docker push researchtriangle/dhis2-db
+
+
 
