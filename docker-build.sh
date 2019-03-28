@@ -38,7 +38,15 @@ dt=`date '+%Y%m%d'`
 
 rm -f $current_dir/releases/dhis2.war
 
-wget -O "$current_dir/$releases_dir/$file_name" "https://s3-eu-west-1.amazonaws.com/releases.dhis2.org/$DHIS2_VERSION/dhis.war"
+
+# They are making scripting this hard: https://releases.dhis2.org/2.31/2.31.1/dhis.war
+# the way it used to be: https://s3-eu-west-1.amazonaws.com/releases.dhis2.org/$DHIS2_VERSION/dhis.war
+# hard coding for now.  Because of this new database schema manager thing called flyway
+# that is being used, the version of the WAR and the version of the database need to 
+# line up.
+
+
+wget -O "$current_dir/$releases_dir/$file_name" "https://www.dropbox.com/s/92ub7spi1ujur9j/ROOT.war?raw=1"
 
 cp -a "$current_dir/$releases_dir/$file_name" "$current_dir/releases/dhis2.war"
 

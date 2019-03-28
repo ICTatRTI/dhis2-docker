@@ -26,6 +26,13 @@ function patch_demo_db {
     (SELECT userid from users where username = 'admin' ) a
     CROSS JOIN (SELECT userroleid from userrole where name = 'System administrator (ALL)') b;
   " >> dhis2-db.sql
+  
+  # we don't use a stinking postgis schema (but bao systems does)
+  sed -i '' 's/postgis.//g' dhis2-db.sql
+
+  # don't override the search path (we need to find postgis stuff)
+  sed -i '' '/search_path/  s/^/-- /' dhis2-db.sql
+  
 
   gzip dhis2-db.sql
 }
@@ -39,6 +46,9 @@ function fetch_data {
     curl -L -o dhis2-db.sql.gz https://github.com/dhis2/dhis2-demo-db/raw/master/trainingland/trainingland.sql.gz?raw=true
   elif [ $DATA_SET == "world-adoption" ]; then
     curl -L -o dhis2-db.sql.gz https://github.com/dhis2/dhis2-demo-db/raw/master/world-adoption/world-adoption.sql.gz?raw=true
+  elif [ $DATA_SET == "omdm" ]; then
+    # download the file from bao and put it somewhere on your local file system
+    cp ~/Data/Tanzania/omdm.sql.gz dhis2-db.sql.gz 
   fi
   
   patch_demo_db
@@ -59,4 +69,5 @@ VERSION_TMP=${DHIS2_VERSION//[-._]/}
 
 fetch_data
 
-docker build -t pgracio/dhis2-db:$DHIS2_VERSION-$DATA_SET .
+docker build -t researchtriangle/dhis2-db:$DHIS2_VERSION-$DATA_SET .
+

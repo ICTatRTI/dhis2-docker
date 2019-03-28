@@ -7,3 +7,5 @@ fig.yml.sample
 releases
 database/dhis2-db.sql.gz
 .DS_Store
+
+dhis2-db.sql.gz
