@@ -2,7 +2,7 @@ version: '2'
 services:
   database:
     container_name: dhis2-omdm-database
-    image: researchtriangle/dhis2-db:2.31.1-omdm
+    image: researchtriangle/dhis2-db:2.31.1-omdm-20190328
     environment:
       POSTGRES_USER: dhis
       POSTGRES_DB: dhis
