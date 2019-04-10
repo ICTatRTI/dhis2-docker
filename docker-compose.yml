@@ -1,19 +1,19 @@
 version: '2'
 services:
   database:
-    container_name: dhis2-database
-    image: pgracio/dhis2-db:2.29-sierra-leone
+    container_name: dhis2-actntd-database
+    image: mdillon/postgis:10
     environment:
       POSTGRES_USER: dhis
       POSTGRES_DB: dhis
       POSTGRES_PASSWORD: dhis
       POSTGRES_DB_TARGET: dhis-target
-      PG_DATA: /var/lib/postgresql/data/pgdata:z
+      PGDATA: actntd:/var/lib/postgresql/data/pgdata:z
     ports:
      - "5432:5432"
   web:
-    container_name: dhis2-web
-    image: dhis2/dhis2-web:2.29-tomcat7-jre8-latest
+    container_name: dhis2-actntd-web
+    image: researchtriangle/dhis2-web:2.31.1-tomcat7-jre8-20190321
     environment:
       JAVA_OPTS: "-Xmx1024m -Xms4000m"
       POSTGRES_DB: dhis
@@ -23,3 +23,6 @@ services:
       - database
     entrypoint: ./wait-for-it.sh -t 0 database:5432 --
     command: catalina.sh run # https://github.com/docker/compose/issues/3140
+  
+volumes:
+  actntd:
