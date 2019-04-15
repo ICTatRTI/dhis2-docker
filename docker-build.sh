@@ -36,11 +36,20 @@ fi
 file_name=`date +dhis2-%Y%m%d.war`
 dt=`date '+%Y%m%d'`
 
-rm -f $current_dir/releases/dhis2.war
+#rm -f $current_dir/releases/dhis2.war
 
-wget -O "$current_dir/$releases_dir/$file_name" "https://s3-eu-west-1.amazonaws.com/releases.dhis2.org/$DHIS2_VERSION/dhis.war"
+# They are making scripting this hard: https://releases.dhis2.org/2.31/2.31.1/dhis.war
+# the way it used to be: https://s3-eu-west-1.amazonaws.com/releases.dhis2.org/$DHIS2_VERSION/dhis.war
+# hard coding for now.  Because of this new database schema manager thing called flyway
+# that is being used, the version of the WAR and the version of the database need to 
+# line up.
 
-cp -a "$current_dir/$releases_dir/$file_name" "$current_dir/releases/dhis2.war"
+
+# wget -O "$current_dir/$releases_dir/$file_name" "https://releases.dhis2.org/$DHIS2_VERSION/$DHIS2_VERSION/dhis.war"
+
+#wget -O "$current_dir/$releases_dir/$file_name" "https://releases.dhis2.org/2.31/2.31.1/dhis.war"
+
+#cp -a "$current_dir/$releases_dir/$file_name" "$current_dir/releases/dhis2.war"
 
 # build new image using new dhis.war 
 image_id=$(docker build -q -t researchtriangle/dhis2-web:$DHIS2_VERSION-tomcat7-jre8-$dt .)
