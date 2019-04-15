@@ -1,4 +1,4 @@
-FROM tomcat:7-jre8
+FROM researchtriangle/tomcat:tomcat7.0.69-jre8-latest
 
 RUN rm -rf /usr/local/tomcat/webapps/ROOT
 COPY conf/hibernate.properties /opt/dhis2/config/hibernate.properties
