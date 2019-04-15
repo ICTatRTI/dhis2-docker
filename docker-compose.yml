@@ -13,7 +13,7 @@ services:
      - "5432:5432"
   web:
     container_name: dhis2-actntd-web
-    image: researchtriangle/dhis2-web:2.31.1-tomcat7-jre8-20190321
+    image: researchtriangle/dhis2-web:2.31.1-tomcat7-jre8-20190415
     environment:
       JAVA_OPTS: "-Xmx1024m -Xms4000m"
       POSTGRES_DB: dhis
