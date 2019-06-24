@@ -2,21 +2,22 @@ version: '2'
 services:
   database:
     container_name: dhis2-stoppalu
-    image: mdillon/postgis:9.5
+    image: mdillon/postgis:10
     environment:
       POSTGRES_USER: dhis
       POSTGRES_DB: dhis
       POSTGRES_PASSWORD: dhis
       POSTGRES_DB_TARGET: dhis-target
       PGDATA: /var/lib/postgresql/data/pgdata
+    command: postgres -c max_locks_per_transaction=256
     ports:
       - 5432:5432
     volumes:
-      - stoppalu:/var/lib/postgresql/data/pgdata
+      - stoppalu10:/var/lib/postgresql/data/pgdata
 
   web:
-    container_name: dhis2-web
-    image: researchtriangle/dhis2-web:2.29-tomcat7-jre8-20180621
+    container_name: dhis2-stoppalu-web
+    image: researchtriangle/dhis2-web:2.32-tomcat7-jre8-20190624
     environment:
       JAVA_OPTS: "-Xmx1024m -Xms4000m"
       POSTGRES_DB: dhis
@@ -28,4 +29,4 @@ services:
     command: catalina.sh run # https://github.com/docker/compose/issues/3140
 
 volumes:
-  stoppalu:
+  stoppalu10:
