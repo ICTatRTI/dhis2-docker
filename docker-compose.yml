@@ -2,7 +2,7 @@ version: '2'
 services:
   database:
     container_name: dhis2-guinea
-    image: mdillon/postgis:10
+    image: researchtriangle/dhis2-db:2.30-guinea-national
     environment:
       POSTGRES_USER: dhis
       POSTGRES_DB: dhis
@@ -13,7 +13,7 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - guinea:/var/lib/postgresql/data/pgdata
+      - guinea2:/var/lib/postgresql/data/pgdata
 
   web:
     container_name: dhis2-guinea-web
@@ -29,4 +29,4 @@ services:
     command: catalina.sh run # https://github.com/docker/compose/issues/3140
 
 volumes:
-  guinea:
+  guinea2:

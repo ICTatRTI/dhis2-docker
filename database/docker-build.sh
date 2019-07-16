@@ -39,6 +39,8 @@ function fetch_data {
     curl -L -o dhis2-db.sql.gz https://github.com/dhis2/dhis2-demo-db/raw/master/trainingland/trainingland.sql.gz?raw=true
   elif [ $DATA_SET == "world-adoption" ]; then
     curl -L -o dhis2-db.sql.gz https://github.com/dhis2/dhis2-demo-db/raw/master/world-adoption/world-adoption.sql.gz?raw=true
+  elif [ $DATA_SET == "guinea-national" ]; then
+    curl -L -o dhis2-db.sql.gz https://www.dropbox.com/s/e2hbcszlf2820av/dhis-export-guinea.sql.gz
   fi
   
   patch_demo_db
@@ -59,4 +61,4 @@ VERSION_TMP=${DHIS2_VERSION//[-._]/}
 
 fetch_data
 
-docker build -t pgracio/dhis2-db:$DHIS2_VERSION-$DATA_SET .
+docker build -t researchtriangle/dhis2-db:$DHIS2_VERSION-$DATA_SET .
