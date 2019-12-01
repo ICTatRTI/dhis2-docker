@@ -1,7 +1,7 @@
 version: '2'
 services:
   database:
-    container_name: dhis2-luzon
+    container_name: dhis2-reach-database
     image: mdillon/postgis:9.5
     environment:
       POSTGRES_USER: dhis
@@ -10,22 +10,22 @@ services:
       POSTGRES_DB_TARGET: dhis-target
       PGDATA: /var/lib/postgresql/data/pgdata
     ports:
-      - 5432:5432
+      - "5432:5432"
     volumes:
-      - luzon:/var/lib/postgresql/data/pgdata
+      - reach:/var/lib/postgresql/data/pgdata
 
   web:
-    container_name: dhis2-web
-    image: researchtriangle/dhis2-web:2.28-tomcat7-jre8-latest
+    container_name: dhis2-web-reachhealth
+    image: researchtriangle/dhis2-web:2.32-tomcat7-jre8-20190624
     environment:
       JAVA_OPTS: "-Xmx1024m -Xms4000m"
       POSTGRES_DB: dhis
     ports:
-      - 8085:8080
+      - "8085:8080"
     depends_on:
       - database
     entrypoint: ./wait-for-it.sh -t 0 database:5432 --
     command: catalina.sh run # https://github.com/docker/compose/issues/3140
 
 volumes:
-  luzon:
+  reach:
