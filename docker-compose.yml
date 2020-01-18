@@ -2,7 +2,7 @@ version: '2'
 services:
   database:
     container_name: dhis2-reach-database
-    image: mdillon/postgis:9.5
+    image: mdillon/postgis:10
     environment:
       POSTGRES_USER: dhis
       POSTGRES_DB: dhis
@@ -16,7 +16,7 @@ services:
 
   web:
     container_name: dhis2-web-reachhealth
-    image: researchtriangle/dhis2-web:2.32-tomcat7-jre8-20190624
+    image: researchtriangle/dhis2-web:2.33.1-tomcat7-jre8-20191204
     environment:
       JAVA_OPTS: "-Xmx1024m -Xms4000m"
       POSTGRES_DB: dhis
