@@ -17,7 +17,7 @@ services:
 
   web:
     container_name: dhis2-stoppalu-web
-    image: researchtriangle/dhis2-web:2.32-tomcat7-jre8-20190624
+    image: researchtriangle/dhis2-web:2.33.2-tomcat7-jre8-20200225
     environment:
       JAVA_OPTS: "-Xmx1024m -Xms4000m"
       POSTGRES_DB: dhis
