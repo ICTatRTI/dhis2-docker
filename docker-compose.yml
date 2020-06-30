@@ -17,7 +17,7 @@ services:
 
   web:
     container_name: dhis2-web-eth
-    image: researchtriangle/dhis2-web:2.33-tomcat7-jre8-20191023 
+    image: researchtriangle/dhis2-web:2.33.3-tomcat7-jre8-20200423
     environment:
       JAVA_OPTS: "-Xmx1024m -Xms4000m"
       POSTGRES_DB: dhis
